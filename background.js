@@ -68,7 +68,7 @@ async function fetchWithRetry(url, options = {}, { retries = 3, baseDelay = 2000
           await sleep(Math.min(waitMs, 60_000), externalSignal);
           continue;
         }
-        throw new Error(`HTTP 429 (rate limited)`);
+        throw new Error(`HTTP 429（请求过于频繁，请稍后重试）`);
       }
       if (resp.status >= 500 && resp.status < 600) {
         if (attempt < retries) {
@@ -356,16 +356,16 @@ async function fetchSteamSearchRender(appid, marketHashName, signal) {
   const url = `${STEAM_SEARCH_API}?query=${encodeURIComponent(marketHashName)}&start=0&count=100&appid=${appid}&norender=1`;
   const resp = await fetchWithRetry(url, { headers: { 'Accept': 'application/json' } }, { retries: 3, baseDelay: 2000 }, signal);
   if (!resp.ok) {
-    if (resp.status === 404) throw new Error('HTTP 404 (item not on Steam Market)');
-    throw new Error(`Steam search API HTTP ${resp.status}`);
+    if (resp.status === 404) throw new Error('HTTP 404（Steam 市场中未找到该饰品）');
+    throw new Error(`Steam 搜索接口 HTTP ${resp.status}`);
   }
   const data = await resp.json();
   if (!data.success || !Array.isArray(data.results) || data.results.length === 0) {
-    throw new Error('item not found in search results');
+    throw new Error('Steam 搜索结果中未找到该饰品');
   }
   // 验证 hash_name 完全匹配（搜索可能返回相似物品）
   const match = data.results.find(r => r.hash_name === marketHashName);
-  if (!match) throw new Error('exact item not found in search results');
+  if (!match) throw new Error('Steam 搜索结果中没有完全匹配的饰品');
   return match;
 }
 
@@ -383,7 +383,7 @@ async function getSteamOrderBookSource(appid, marketHashName, signal) {
   const response = await fetchWithRetry(listingUrl, {
     headers: { 'Accept': 'text/html' }
   }, { retries: 2, baseDelay: 3000 }, signal);
-  if (!response.ok) throw new Error(`Steam listing page HTTP ${response.status}`);
+  if (!response.ok) throw new Error(`Steam 商品页面 HTTP ${response.status}`);
   let source = parseSteamMarketPage(await response.text(), appid, marketHashName, STEAM_CURRENCY_CNY);
   if (source.kind === 'unavailable') {
     // Desktop transport enables Steam's documented-by-UI "Exit Market Beta"
@@ -421,9 +421,9 @@ async function fetchSteamOrderBook(appid, marketHashName, signal) {
     headers: { 'Accept': 'application/json' },
     referrer: listingUrl
   }, { retries: 2, baseDelay: 3000 }, signal);
-  if (!response.ok) throw new Error(`Steam orderbook HTTP ${response.status}`);
+  if (!response.ok) throw new Error(`Steam 求购盘接口 HTTP ${response.status}`);
   const data = await response.json();
-  if (!data || !data.success) throw new Error('Steam orderbook response unsuccessful');
+  if (!data || !data.success) throw new Error('Steam 求购盘接口未返回有效数据');
   return { data, itemNameId, source: 'steam-order-histogram-cny' };
 }
 
@@ -662,7 +662,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   if (request.action === 'enrichSteam') {
     if (isEnriching) {
-      sendResponse({ ok: false, error: 'Already enriching' });
+      sendResponse({ ok: false, error: 'Steam 行情正在复核，请等待或先取消' });
       return true;
     }
     // Acknowledge immediately so the popup can poll progress and offer cancellation.

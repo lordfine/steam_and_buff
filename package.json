@@ -1,7 +1,7 @@
 {
-  "name": "skinledger",
-  "version": "2.2.0",
-  "description": "SkinLedger · 饰账 — BUFF / Steam 双端只读比价工作台",
+  "name": "steam-and-buff",
+  "version": "2.2.1",
+  "description": "Steam 余额与 BUFF 挂刀、倒余额成本分析工具：CS2 / DOTA2 饰品比价、人民币行情复核、Steam 钱包净到账估算，支持本地桌面版和浏览器插件，中文界面，MIT 开源。",
   "private": true,
   "main": "desktop/main.js",
   "author": "lordfine",
@@ -25,7 +25,7 @@
   },
   "build": {
     "appId": "local.steam.balance",
-    "productName": "SkinLedger",
+    "productName": "steam_and_buff·倒余额",
     "directories": {
       "output": "dist/desktop"
     },
@@ -45,10 +45,10 @@
       "icon": "icons/icon.ico",
       "signExecutable": false
     },
-    "artifactName": "SkinLedger-${version}-${arch}.${ext}"
+    "artifactName": "steam_and_buff·倒余额-${version}-桌面版-${arch}.${ext}"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lordfine/skinledger.git"
+    "url": "git+https://github.com/lordfine/steam_and_buff.git"
   }
 }

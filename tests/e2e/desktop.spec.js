@@ -39,7 +39,10 @@ test.afterEach(async () => {
 });
 
 test('native window, empty state, sandbox boundary and offline session check', async () => {
-  await expect(page).toHaveTitle('SkinLedger · 饰账｜本地版');
+  await expect(page).toHaveTitle('steam_and_buff·倒余额｜本地版');
+  await expect(page.locator('body')).not.toContainText('SkinLedger');
+  await expect(page.locator('body')).not.toContainText('MARKET INTELLIGENCE');
+  await expect(page.locator('body')).not.toContainText('ITEM INSIGHT');
   await expect(page.locator('#demoNotice')).toBeVisible();
   await expect(page.getByRole('button', { name: '登录 BUFF', exact: true })).toBeDisabled();
   await expect(page.locator('#ovTotal')).toHaveText('0');

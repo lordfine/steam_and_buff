@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<title>SkinLedger · 饰账｜本地版</title>
+<title>steam_and_buff·倒余额｜本地版</title>
 <link rel="stylesheet" href="table.css">
 <link rel="stylesheet" href="desktop.css">
 <link rel="stylesheet" href="../ui/brand.css">
 </head>
 <body>
   <header class="top-bar">
-    <div class="brand-lockup"><img class="brand-mark" src="../ui/logo.svg" alt=""><div><div class="eyebrow">MARKET INTELLIGENCE / DESKTOP</div><h1>SkinLedger <span class="brand-cn">饰账</span></h1></div></div>
+    <div class="brand-lockup"><img class="brand-mark" src="../ui/logo.svg" alt=""><div><div class="eyebrow">饰品行情 / 桌面版</div><h1>steam_and_buff·倒余额 <span class="brand-cn">饰品比价工作台</span></h1></div></div>
     <div class="top-actions">
       <button id="btnRefresh" class="btn">重读本地数据</button>
       <button id="btnHistory" class="btn btn-secondary">扫描历史</button>
@@ -21,7 +21,7 @@
   </header>
 
   <main>
-<section class="workspace-intro"><div><div class="eyebrow">YOUR MARKET WORKSPACE</div><h2>看清每一笔饰品成本。</h2><p>对照两侧行情，让价格、费用与数据新鲜度一起说话。</p></div><div class="flow-legend"><b>01 · BUFF 成本</b><span>→</span><b>02 · Steam 复核</b><span>→</span><b>03 · 候选比较</b></div></section>
+<section class="workspace-intro"><div><div class="eyebrow">你的饰品行情工作台</div><h2>看清每一笔饰品成本。</h2><p>对照两侧行情，让价格、费用与数据新鲜度一起说话。</p></div><div class="flow-legend"><b>01 · BUFF 成本</b><span>→</span><b>02 · Steam 复核</b><span>→</span><b>03 · 候选比较</b></div></section>
   <section class="scan-panel" aria-label="扫描控制">
     <div class="panel-heading"><div><h2>扫描工作台</h2><p>BUFF 现金成本 → Steam 钱包净到账估算 · 只读，不自动买卖</p></div><span id="modeBadge" class="mode-badge">本地应用</span></div>
     <div id="demoNotice" class="demo-notice" hidden>离线演示 · 所有饰品和价格均为合成测试数据，不连接账号或真实市场。正常使用请关闭此窗口后启动正式版。</div>
@@ -83,7 +83,7 @@
         <option value="opportunity">推荐排序</option>
         <option value="quickSellCostRate">快速卖出成本率</option>
         <option value="liquidityDays">供给覆盖天数</option>
-        <option value="steamVolume">Steam近24h成交量</option>
+        <option value="steamVolume">Steam近24小时成交量</option>
         <option value="buffSellMinPrice">BUFF价格</option>
         <option value="sellRatio">Steam挂单成本率</option>
       </select>
@@ -113,7 +113,7 @@
           <th class="col-price">Steam最高求购</th>
           <th class="col-price">快速净到账</th>
           <th class="col-ratio">快速成本率</th>
-          <th class="col-num">近24h成交</th>
+          <th class="col-num">近24小时成交</th>
           <th class="col-num">Steam在售</th>
           <th class="col-num">供给覆盖</th>
           <th class="col-num">行情时间</th>
@@ -129,7 +129,7 @@
   <div class="pagination" id="pagination"></div>
 
   <dialog id="detailDialog" aria-labelledby="detailTitle">
-    <div class="dialog-heading"><div><div class="eyebrow">ITEM INSIGHT / 饰品复核</div><h2 id="detailTitle"></h2></div><button id="btnCloseDetail" class="text-button" aria-label="关闭详情">关闭 ×</button></div>
+    <div class="dialog-heading"><div><div class="eyebrow">饰品详情 / 行情复核</div><h2 id="detailTitle"></h2></div><button id="btnCloseDetail" class="text-button" aria-label="关闭详情">关闭 ×</button></div>
     <p id="detailHash" class="muted"></p>
     <div id="detailMetrics" class="detail-metrics"></div>
     <div id="detailEvidence" class="detail-evidence"></div>

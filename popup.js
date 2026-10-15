@@ -83,7 +83,7 @@ function renderItems() {
             ? `Steam快速卖 ¥${formatPrice(item.steamBuyOrderPrice)} → 净到 ¥${formatPrice(item.steamQuickSellNetCny)}`
             : (item.steamOrderbookUnsupported ? 'Steam求购盘：当前不可读' : 'Steam求购盘：待复核') }),
           el('span', { class: 'ratio-chip', text: `快速成本率 ${formatRate(quickRate)}` }),
-          el('span', { class: 'liquidity-chip', text: `近24h ${item.steamVolume ?? '—'} 笔 · 在售 ${item.steamSellCount ?? '—'} · 供给覆盖 ${!Number.isFinite(item.liquidityDays) ? '—' : `${item.liquidityDays.toFixed(1)}天`}` })
+          el('span', { class: 'liquidity-chip', text: `近24小时 ${item.steamVolume ?? '—'} 笔 · 在售 ${item.steamSellCount ?? '—'} · 供给覆盖 ${!Number.isFinite(item.liquidityDays) ? '—' : `${item.liquidityDays.toFixed(1)}天`}` })
         ),
         el('div', { class: 'item-foot' },
           el('span', { class: 'freshness', title: item.steamOrderbookError || '', text: ageText ? `Steam 更新于 ${ageText}` : (item.steamOrderbookError ? `求购盘${item.steamOrderbookUnsupported ? '无法读取' : '暂不可用'}，挂单价仅作初筛` : 'Steam 实时报价尚未核实') }),

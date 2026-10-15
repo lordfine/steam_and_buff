@@ -16,7 +16,7 @@ function walk(dir) {
 ['lib', 'ui', 'icons'].forEach(walk);
 files.sort();
 const out = path.join(root, 'dist', 'extension');
-const stage = path.join(out, 'skinledger-' + manifest.version);
+const stage = path.join(out, 'steam_and_buff-' + manifest.version);
 fs.mkdirSync(stage, { recursive: true });
 function crc32(bytes) {
   let crc = 0xffffffff;
@@ -44,6 +44,6 @@ for (const file of files) {
 const directory = Buffer.concat(central), end = Buffer.alloc(22);
 end.writeUInt32LE(0x06054b50); end.writeUInt16LE(files.length, 8); end.writeUInt16LE(files.length, 10);
 end.writeUInt32LE(directory.length, 12); end.writeUInt32LE(offset, 16);
-const zip = path.join(out, 'SkinLedger-' + manifest.version + '-extension.zip');
+const zip = path.join(out, 'steam_and_buff·倒余额-' + manifest.version + '-浏览器插件.zip');
 fs.writeFileSync(zip + '.tmp', Buffer.concat([...local, directory, end])); fs.renameSync(zip + '.tmp', zip);
 console.log('Extension: ' + zip + '\nUnpacked: ' + stage + '\nFiles: ' + files.length);

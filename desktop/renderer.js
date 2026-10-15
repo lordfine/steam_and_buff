@@ -325,7 +325,7 @@ function escapeCSVCell(value) {
 }
 function exportCSV() {
   if (!filteredItems.length) { feedback('当前没有可导出的结果。', true); return; }
-  const headers = ['排名','名称','游戏','BUFF买入成本','BUFF在售','Steam最低挂单','挂单净到账估算','挂单成本率','Steam最高求购','快速净到账估算','快速成本率','近24h成交量','Steam在售数','供给覆盖天数','行情更新时间','BUFF链接','Steam链接','行情状态','BUFF采集时间','Steam完整复核时间'];
+  const headers = ['排名','名称','游戏','BUFF买入成本','BUFF在售','Steam最低挂单','挂单净到账估算','挂单成本率','Steam最高求购','快速净到账估算','快速成本率','近24小时成交量','Steam在售数','供给覆盖天数','行情更新时间','BUFF链接','Steam链接','行情状态','BUFF采集时间','Steam完整复核时间'];
   const rows = filteredItems.map((item, index) => [
     index + 1, item.name, item.game === 'csgo' ? 'CS2' : 'DOTA2', item.buffSellMinPrice,
     item.buffSellNum, item.steamPriceCny, item.afterTaxPrice, item.listingCostRate ?? item.sellRatio,

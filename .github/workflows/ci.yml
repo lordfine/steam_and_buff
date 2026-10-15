@@ -1,4 +1,4 @@
-name: Checks
+name: 自动检查
 on:
   push:
     branches: [main]
@@ -8,6 +8,7 @@ permissions:
   contents: read
 jobs:
   dual-platform:
+    name: 双版本验证
     runs-on: windows-latest
     timeout-minutes: 20
     steps:

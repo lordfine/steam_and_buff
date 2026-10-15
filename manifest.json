@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "SkinLedger · 饰账",
-  "version": "2.2.0",
-  "description": "BUFF / Steam 饰品比价工作台：成本率、人民币求购盘、流动性与行情新鲜度。只读，不自动交易。",
+  "name": "steam_and_buff·倒余额",
+  "version": "2.2.1",
+  "description": "Steam 余额、BUFF 挂刀与倒余额成本分析：CS2 / DOTA2 饰品比价、人民币行情复核、挂单与求购净到账估算。中文界面，只读，不自动交易。",
   "permissions": [
     "storage",
     "tabs",
@@ -18,7 +18,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "SkinLedger · 饰账"
+    "default_title": "steam_and_buff·倒余额"
   },
   "background": {
     "service_worker": "background.js"

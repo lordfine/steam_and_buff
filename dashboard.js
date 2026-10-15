@@ -200,7 +200,7 @@ function escapeCSVCell(value) {
 }
 function exportCSV() {
   if (!filteredItems.length) return;
-  const headers = ['排名','名称','游戏','BUFF买入成本','BUFF在售','Steam最低挂单','挂单净到账估算','挂单成本率','Steam最高求购','快速净到账估算','快速成本率','近24h成交量','Steam在售数','供给覆盖天数','行情更新时间','BUFF链接','Steam链接'];
+  const headers = ['排名','名称','游戏','BUFF买入成本','BUFF在售','Steam最低挂单','挂单净到账估算','挂单成本率','Steam最高求购','快速净到账估算','快速成本率','近24小时成交量','Steam在售数','供给覆盖天数','行情更新时间','BUFF链接','Steam链接'];
   const rows = filteredItems.map((item, index) => [
     index + 1, item.name, item.game === 'csgo' ? 'CS2' : 'DOTA2', item.buffSellMinPrice,
     item.buffSellNum, item.steamPriceCny, item.afterTaxPrice, item.listingCostRate ?? item.sellRatio,
@@ -208,11 +208,11 @@ function exportCSV() {
     item.steamSellCount, item.liquidityDays, item.enrichedAt ? new Date(item.enrichedAt).toISOString() : '',
     `https://buff.163.com/goods/${item.id}`, item.steamMarketUrl || ''
   ].map(escapeCSVCell).join(','));
-  downloadFile(`skinledger-${new Date().toISOString().slice(0, 10)}.csv`, '\uFEFF' + [headers, ...rows].map(row => Array.isArray(row) ? row.map(escapeCSVCell).join(',') : row).join('\n'), 'text/csv;charset=utf-8');
+  downloadFile(`steam_and_buff·倒余额-${new Date().toISOString().slice(0, 10)}.csv`, '\uFEFF' + [headers, ...rows].map(row => Array.isArray(row) ? row.map(escapeCSVCell).join(',') : row).join('\n'), 'text/csv;charset=utf-8');
 }
 function exportJSON() {
   if (!filteredItems.length) return;
-  downloadFile(`skinledger-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(filteredItems, null, 2), 'application/json');
+  downloadFile(`steam_and_buff·倒余额-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(filteredItems, null, 2), 'application/json');
 }
 function downloadFile(name, contents, type) {
   const url = URL.createObjectURL(new Blob([contents], { type }));

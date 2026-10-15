@@ -47,7 +47,7 @@ function openLogin() {
   if (demo) return { ok: false, error: '离线演示模式不连接账号。关闭后用正常模式启动即可登录。' };
   if (loginWindow && !loginWindow.isDestroyed()) { loginWindow.show(); loginWindow.focus(); return { ok: true }; }
   loginWindow = new BrowserWindow({
-    width: 1100, height: 800, title: 'BUFF 登录 · SkinLedger · 饰账', autoHideMenuBar: true,
+    width: 1100, height: 800, title: 'BUFF 登录 · steam_and_buff·倒余额', autoHideMenuBar: true,
     parent: mainWindow,
     webPreferences: { session: marketSession, nodeIntegration: false, contextIsolation: true, sandbox: true }
   });
@@ -104,7 +104,7 @@ function registerIpc() {
   handle('export', async file => {
     if (!file || !['csv', 'json'].includes(file.type) || typeof file.contents !== 'string' || file.contents.length > 50_000_000) throw new Error('导出格式或大小无效');
     const result = await dialog.showSaveDialog(mainWindow, {
-      title: '导出筛选结果', defaultPath: `steam-balance-${new Date().toISOString().slice(0, 10)}.${file.type}`,
+      title: '导出筛选结果', defaultPath: `steam_and_buff·倒余额-${new Date().toISOString().slice(0, 10)}.${file.type}`,
       filters: [{ name: file.type.toUpperCase(), extensions: [file.type] }]
     });
     if (result.canceled || !result.filePath) return { ok: true, cancelled: true };

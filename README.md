@@ -1,26 +1,26 @@
 <div align="center">
 
-<img src="docs/assets/cover.png" alt="SkinLedger · 饰账：看清每一笔饰品成本" width="100%">
+<img src="docs/assets/cover.png" alt="steam_and_buff·倒余额：看清每一笔饰品成本" width="100%">
 
-# SkinLedger · 饰账
+# steam_and_buff·倒余额
 
 **把 BUFF 买入成本与 Steam 钱包净到账放在同一张工作台。**
 
-饰品比价 · 人民币求购盘 · 流动性参考 · 两侧行情新鲜度
+Steam 余额 · BUFF 挂刀 · 饰品比价 · 倒余额成本 · 净到账估算
 
-[![Release](https://img.shields.io/github/v/release/lordfine/skinledger?color=28634f)](https://github.com/lordfine/skinledger/releases/latest)
-[![Checks](https://github.com/lordfine/skinledger/actions/workflows/ci.yml/badge.svg)](https://github.com/lordfine/skinledger/actions/workflows/ci.yml)
-[![MIT](https://img.shields.io/badge/License-MIT-8a9a5b.svg)](LICENSE)
-[![Desktop](https://img.shields.io/badge/Desktop-Windows_x64-476356)](#桌面版)
-[![Extension](https://img.shields.io/badge/Extension-Chrome_%2F_Edge_MV3-65766c)](#浏览器插件版)
+[![最新版本](https://img.shields.io/github/v/release/lordfine/steam_and_buff?label=最新版本&color=28634f)](https://github.com/lordfine/steam_and_buff/releases/latest)
+[![自动检查](https://github.com/lordfine/steam_and_buff/actions/workflows/ci.yml/badge.svg)](https://github.com/lordfine/steam_and_buff/actions/workflows/ci.yml)
+[![MIT](https://img.shields.io/badge/许可证-MIT-8a9a5b.svg)](LICENSE)
+[![桌面版](https://img.shields.io/badge/桌面版-Windows_x64-476356)](#桌面版)
+[![插件版](https://img.shields.io/badge/插件版-Chrome_%2F_Edge-65766c)](#浏览器插件版)
 
-[快速开始](#快速开始) · [两种版本](#两种版本一套计算口径) · [界面预览](#界面预览) · [开发](#开发与验证) · [English](#english)
+[快速开始](#快速开始) · [两种版本](#两种版本一套计算口径) · [界面预览](#界面预览) · [开发](#开发与验证)
 
 </div>
 
 ## 看见价格，也看见证据
 
-SkinLedger（原“Steam 倒余额”）是一个**本地优先、只读**的 BUFF / Steam 饰品比价工具。它不自动买卖，不索取密码，不提供钱包提现，也不承诺利润或成交时间。
+steam_and_buff·倒余额是一款面向中文用户的 **Steam 余额、BUFF 挂刀与倒余额成本分析工具**，支持 CS2 / DOTA2 饰品比价、Steam 钱包净到账估算、人民币行情复核和候选筛选，提供本地桌面版与浏览器插件版。项目本地优先、只读。它不自动买卖，不索取密码，不提供钱包提现，也不承诺利润或成交时间。
 
 | 你想知道 | 工作台提供什么 |
 |---|---|
@@ -32,24 +32,24 @@ SkinLedger（原“Steam 倒余额”）是一个**本地优先、只读**的 BU
 
 ## 快速开始
 
-从 [Releases](https://github.com/lordfine/skinledger/releases/latest) 下载对应文件，不需要 API Key。
+从 [版本下载](https://github.com/lordfine/steam_and_buff/releases/latest) 下载对应文件，不需要接口密钥。
 
 ### 桌面版
 
-1. 下载 `SkinLedger-2.2.0-x64.exe`，双击运行，无需安装 Node.js。
+1. 下载 `steam_and_buff·倒余额-2.2.1-桌面版-x64.exe`，双击运行，无需安装 Node.js。
 2. 点击 **登录 BUFF**，在应用独立窗口内自行登录，再点击 **检查登录**。
 3. 选择 CS2 / DOTA2，建议先选 **指定页**，点击 **扫描并筛选**。
 4. 扫描后自动限速复核前 20 件预选候选；其余可通过 **复核 Steam 行情** 分批处理。
 5. 点击饰品名称查看证据与失败原因，按需收藏或导出。
 
-> 当前提供 Windows x64 便携包，暂未代码签名。升级前完全退出旧版。沿用旧数据目录，已有登录、收藏和扫描不会因更名自动清空。源码用户也可双击 `启动本地应用.cmd`。
+> 当前提供 Windows x64 便携包，暂未代码签名。升级前完全退出旧版。扫描结果、收藏与登录会话保存在本机。源码用户也可双击 `启动本地应用.cmd`。
 
 ### 浏览器插件版
 
-1. 下载 `SkinLedger-2.2.0-extension.zip`，**先解压**到一个固定目录。
+1. 下载 `steam_and_buff·倒余额-2.2.1-浏览器插件.zip`，**先解压**到一个固定目录。
 2. Chrome / Edge 打开扩展管理页，开启开发者模式，选择 **加载已解压的扩展程序**，选中含 `manifest.json` 的目录。
 3. 在同一个浏览器配置中登录 BUFF。首次安装或升级新增权限时，由浏览器确认授权。
-4. 点击 SkinLedger 图标，在弹窗中扫描；**BUFF 当前页**模式使用当前 BUFF 标签页的页码。
+4. 点击steam_and_buff·倒余额图标，在弹窗中扫描；**BUFF 当前页**模式使用当前 BUFF 标签页的页码。
 5. 点击 **展开工作台** 打开大屏面板，筛选、复核并导出。
 
 > 插件目前以手动加载方式分发，尚未上架扩展商店。以 Chrome 120+ / Edge Chromium 120+ 为最低 API 基线；当前自动测试覆盖 Playwright Chromium。不会读取其他浏览器配置。
@@ -92,7 +92,7 @@ SkinLedger（原“Steam 倒余额”）是一个**本地优先、只读**的 BU
 
 - **净到账估算**：使用统一估算费率计算；实际手续费、最小计费和最终成交以 Steam 确认为准。
 - **成本率**：`BUFF 买入成本 ÷ Steam 净到账估算`，越低表示同额钱包余额所需现金越少，不等于现金利润率。
-- **供给覆盖**：`Steam 在售数 ÷ 近 24h 成交量`，是大盘流动性参考，不保证某件饰品多久能卖出。
+- **供给覆盖**：`Steam 在售数 ÷ 近 24 小时 成交量`，是大盘流动性参考，不保证某件饰品多久能卖出。
 - 默认候选要求成本率 ≤ 0.75、供给覆盖 ≤ 3 天，且 BUFF / Steam 两侧有效时间均在 30 分钟内。
 - Steam 只返回外币、相似饰品或缺少成交量时，不伪造人民币报价、不将其计为有效候选。
 - “查看待处理”会清除价格等限制以展示更多结果。Steam 复核只更新 Steam；BUFF 成本过期须重新扫描。
@@ -100,7 +100,7 @@ SkinLedger（原“Steam 倒余额”）是一个**本地优先、只读**的 BU
 
 ## Steam 复核为什么可能失败？
 
-2.2.0 已将桌面版的新版页面兼容修复带到插件版：优先解析精确匹配的人民币结构化数据，需要时采用 Steam 自身的经典市场页面偏好获取求购盘 ID，再请求人民币行情。两端都不会把外币默认报价当成人民币。
+2.2 系列已将桌面版的新版页面兼容修复带到插件版：优先解析精确匹配的人民币结构化数据，需要时采用 Steam 自身的经典市场页面偏好获取求购盘 ID，再请求人民币行情。两端都不会把外币默认报价当成人民币。
 
 网络、HTTP 429 限流、登录失效或平台再次改版仍可能造成失败。先查看具体错误，等待后重试；不要通过提高请求频率处理限流。缺少成交量的商品保持“未完整复核”。
 
@@ -140,7 +140,7 @@ tests/                 纯逻辑、桌面后端、MV3 与 Electron 验收
 docs/                  术语决策、品牌规范和界面截图
 ```
 
-插件打包采用显式文件白名单，不含测试、日志、账号数据、备份或开发环境配置。安装包放在 Releases，不进入源码历史。
+插件打包采用显式文件白名单，不含测试、日志、账号数据、备份或开发环境配置。安装包放在 版本发布页，不进入源码历史。
 
 ## 本地数据与隐私
 
@@ -149,12 +149,6 @@ docs/                  术语决策、品牌规范和界面截图
 插件数据保存在当前扩展的本地存储中。新增的 DNR 权限只对**本扩展发出的 Steam 商品页请求**附加页面偏好，不读取认证 Cookie，不写入浏览器 Cookie 存储，不改变普通网页请求。
 
 [安全与隐私](SECURITY.md) · [参与开发](CONTRIBUTING.md) · [更新日志](CHANGELOG.md) · [术语表](GLOSSARY.md)
-
-## English
-
-**SkinLedger** is a local-first, read-only BUFF / Steam skin comparison workspace, available as a Windows desktop app and a Chromium Manifest V3 extension. Both editions share pricing calculations, CNY orderbook verification and conservative freshness rules. No automatic trading, cloud backend, telemetry or profit guarantees. The UI and primary documentation are in Simplified Chinese.
-
-Download the Windows portable executable or unpacked-extension ZIP from Releases. The desktop app has its own login session; the extension uses the current browser profile. Demo screenshots contain synthetic data only.
 
 ## 许可
 

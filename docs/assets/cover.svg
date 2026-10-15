@@ -2,15 +2,15 @@
 <rect width="1280" height="440" rx="24" fill="#173e34"/>
 <g fill="none" stroke="#d7e8cb" opacity=".08"><path d="M700 0v440m80-440v440m80-440v440m80-440v440m80-440v440m80-440v440m80-440v440M640 80h640m-640 80h640m-640 80h640m-640 80h640m-640 80h640"/></g>
 <g font-family="Segoe UI, Microsoft YaHei, sans-serif">
-<text x="66" y="76" fill="#a4c68e" font-size="13" letter-spacing="4">A CLEARER VIEW OF YOUR MARKET</text>
-<text x="62" y="165" fill="#f7faef" font-size="64" font-weight="700" letter-spacing="-2">SkinLedger</text>
-<text x="65" y="219" fill="#d7e8cb" font-size="28">饰账 · 看清每一笔饰品成本</text>
+<text x="66" y="76" fill="#a4c68e" font-size="13" letter-spacing="4">面向中文用户的饰品比价工具</text>
+<text x="62" y="165" fill="#f7faef" font-size="36" font-weight="700" letter-spacing="-2">steam_and_buff·倒余额</text>
+<text x="65" y="219" fill="#d7e8cb" font-size="28">Steam 余额 · BUFF 挂刀 · 成本核算</text>
 <text x="66" y="273" fill="#a8c2b2" font-size="17">BUFF × Steam / 只读比价与钱包净到账估算</text>
-<rect x="65" y="323" width="136" height="38" rx="19" fill="#2c5547"/><text x="89" y="348" fill="#d7e8cb" font-size="14">DESKTOP APP</text>
-<rect x="213" y="323" width="152" height="38" rx="19" fill="#2c5547"/><text x="236" y="348" fill="#d7e8cb" font-size="14">BROWSER MV3</text>
+<rect x="65" y="323" width="136" height="38" rx="19" fill="#2c5547"/><text x="89" y="348" fill="#d7e8cb" font-size="14">本地桌面版</text>
+<rect x="213" y="323" width="152" height="38" rx="19" fill="#2c5547"/><text x="236" y="348" fill="#d7e8cb" font-size="14">浏览器插件版</text>
 <rect x="377" y="323" width="76" height="38" rx="19" fill="#d7e8cb"/><text x="402" y="348" fill="#173e34" font-size="14">MIT</text>
 <rect x="755" y="90" width="435" height="262" rx="18" fill="#f6f7f3"/>
-<text x="782" y="130" fill="#68776f" font-size="12" letter-spacing="2">ONE WORKSPACE. TWO MARKETS.</text>
+<text x="782" y="130" fill="#68776f" font-size="12" letter-spacing="2">一个工作台，对照两个市场。</text>
 <path d="M782 150h382" stroke="#dce3dc"/>
 <text x="783" y="188" fill="#68776f" font-size="14">BUFF 买入成本</text><text x="1160" y="188" fill="#173e34" font-size="18" text-anchor="end">现金成本</text>
 <text x="783" y="229" fill="#68776f" font-size="14">Steam 求购盘</text><text x="1160" y="229" fill="#173e34" font-size="18" text-anchor="end">净到账估算</text>

@@ -2,14 +2,14 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>SkinLedger · 饰账｜浏览器版</title>
+<title>steam_and_buff·倒余额｜浏览器版</title>
 <link rel="stylesheet" href="dashboard.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="ui/brand.css">
 </head>
 <body class="extension-shell">
   <header class="top-bar">
-    <div class="brand-lockup"><img class="brand-mark" src="ui/logo.svg" alt=""><div><div class="eyebrow">MARKET INTELLIGENCE / EXTENSION</div><h1>SkinLedger <span class="brand-cn">饰账</span></h1></div></div>
+    <div class="brand-lockup"><img class="brand-mark" src="ui/logo.svg" alt=""><div><div class="eyebrow">饰品行情 / 浏览器插件版</div><h1>steam_and_buff·倒余额 <span class="brand-cn">饰品比价工作台</span></h1></div></div>
     <div class="top-actions">
       <button id="btnRefresh" class="btn">刷新数据</button>
       <button id="btnEnrichSteam" class="btn btn-green">补查 Steam 行情</button>
@@ -17,7 +17,7 @@
       <button id="btnExportJSON" class="btn btn-secondary">导出 JSON</button>
     </div>
   </header>
-<main><section class="workspace-intro"><div><div class="eyebrow">YOUR MARKET WORKSPACE</div><h2>看清每一笔饰品成本。</h2><p>对照两侧行情，让价格、费用与数据新鲜度一起说话。</p></div><div class="flow-legend"><b>01 · BUFF 成本</b><span>→</span><b>02 · Steam 复核</b><span>→</span><b>03 · 候选比较</b></div></section>
+<main><section class="workspace-intro"><div><div class="eyebrow">你的饰品行情工作台</div><h2>看清每一笔饰品成本。</h2><p>对照两侧行情，让价格、费用与数据新鲜度一起说话。</p></div><div class="flow-legend"><b>01 · BUFF 成本</b><span>→</span><b>02 · Steam 复核</b><span>→</span><b>03 · 候选比较</b></div></section>
 
   <div class="overview-cards" id="overviewCards">
     <div class="card">
@@ -63,7 +63,7 @@
         <option value="opportunity">推荐排序</option>
         <option value="quickSellCostRate">快速卖出成本率</option>
         <option value="liquidityDays">供给覆盖天数</option>
-        <option value="steamVolume">Steam近24h成交量</option>
+        <option value="steamVolume">Steam近24小时成交量</option>
         <option value="buffSellMinPrice">BUFF价格</option>
         <option value="sellRatio">Steam挂单成本率</option>
       </select>
@@ -91,7 +91,7 @@
           <th class="col-price">Steam最高求购</th>
           <th class="col-price">快速净到账</th>
           <th class="col-ratio">快速成本率</th>
-          <th class="col-num">近24h成交</th>
+          <th class="col-num">近24小时成交</th>
           <th class="col-num">Steam在售</th>
           <th class="col-num">供给覆盖</th>
           <th class="col-num">行情时间</th>
