@@ -1,0 +1,29 @@
+name: 故障报告
+description: 报告扫描、行情复核或界面问题
+body:
+  - type: markdown
+    attributes:
+      value: 请勿上传 Cookie、Token、账号信息或完整的应用数据目录。截图请先脱敏。
+  - type: dropdown
+    id: edition
+    attributes:
+      label: 使用版本
+      options: [Windows 桌面版, Chrome 插件版, Edge 插件版]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: SkinLedger 版本与系统 / 浏览器版本
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤、预期结果与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 脱敏后的错误提示或截图

@@ -1,0 +1,11 @@
+{
+  "capturedDate": "2026-10-16",
+  "appid": 570,
+  "marketHashName": "Feast of Abscession - Back",
+  "ssr": {
+    "renderContext": {
+      "queryData": "{\"queries\":[{\"queryKey\":[\"market\",\"orderbook\",570,\"Feast of Abscession - Back\"],\"state\":{\"status\":\"success\",\"data\":{\"amtMaxBuyOrder\":89,\"amtMinSellOrder\":107,\"eCurrency\":13,\"cBuyOrders\":27205,\"cSellOrders\":603}}}]}"
+    }
+  },
+  "legacy": "Market_LoadOrderSpread(176437079);"
+}

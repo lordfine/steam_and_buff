@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>SkinLedger · 饰账｜浏览器版</title>
+<link rel="stylesheet" href="dashboard.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="ui/brand.css">
+</head>
+<body class="extension-shell">
+  <header class="top-bar">
+    <div class="brand-lockup"><img class="brand-mark" src="ui/logo.svg" alt=""><div><div class="eyebrow">MARKET INTELLIGENCE / EXTENSION</div><h1>SkinLedger <span class="brand-cn">饰账</span></h1></div></div>
+    <div class="top-actions">
+      <button id="btnRefresh" class="btn">刷新数据</button>
+      <button id="btnEnrichSteam" class="btn btn-green">补查 Steam 行情</button>
+      <button id="btnExportCSV" class="btn btn-secondary">导出 CSV</button>
+      <button id="btnExportJSON" class="btn btn-secondary">导出 JSON</button>
+    </div>
+  </header>
+<main><section class="workspace-intro"><div><div class="eyebrow">YOUR MARKET WORKSPACE</div><h2>看清每一笔饰品成本。</h2><p>对照两侧行情，让价格、费用与数据新鲜度一起说话。</p></div><div class="flow-legend"><b>01 · BUFF 成本</b><span>→</span><b>02 · Steam 复核</b><span>→</span><b>03 · 候选比较</b></div></section>
+
+  <div class="overview-cards" id="overviewCards">
+    <div class="card">
+      <div class="card-value" id="ovTotal">-</div>
+      <div class="card-label">扫描商品数</div>
+    </div>
+    <div class="card">
+      <div class="card-value" id="ovAvgRatio">-</div>
+      <div class="card-label">达标候选</div>
+    </div>
+    <div class="card">
+      <div class="card-value" id="ovBestRatio">-</div>
+      <div class="card-label">最佳快速成本率</div>
+    </div>
+    <div class="card">
+      <div class="card-value" id="ovScanTime">-</div>
+      <div class="card-label">数据时间</div>
+    </div>
+  </div>
+
+<div class="section-title"><h2>行情清单</h2><span>只读分析 · 不自动买卖 · 人民币估算</span></div>
+  <div class="toolbar">
+    <input type="search" id="searchInput" placeholder="按饰品名 / Steam 市场名精准搜索..." class="search-input" autocomplete="off">
+    <div class="filter-row">
+      <label><input type="checkbox" id="candidateFilter" checked> 只看达标候选</label>
+      <label>快速成本率≤ <input type="number" id="ratioFilter" value="0.75" step="0.01" min="0" max="2"></label>
+      <label>供给覆盖≤ <input type="number" id="maxLiquidityDays" value="3" step="1" min="1" max="365"> 天</label>
+      <label>最低价: <input type="number" id="minPrice" value="0" step="1" min="0"></label>
+      <label>最高价: <input type="number" id="maxPrice" value="99999" step="1" min="0"></label>
+      <label>BUFF在售≥: <input type="number" id="minBuffSellNum" value="0" step="1" min="0"></label>
+      <label>Steam日成交≥: <input type="number" id="minSteamVolume" value="0" step="1" min="0"></label>
+      <label>游戏:
+        <select id="gameFilter">
+          <option value="all">全部</option>
+          <option value="dota2">DOTA2</option>
+          <option value="csgo">CS2</option>
+        </select>
+      </label>
+    </div>
+    <div class="sort-row">
+      <span>排序:</span>
+      <select id="sortBy">
+        <option value="opportunity">推荐排序</option>
+        <option value="quickSellCostRate">快速卖出成本率</option>
+        <option value="liquidityDays">供给覆盖天数</option>
+        <option value="steamVolume">Steam近24h成交量</option>
+        <option value="buffSellMinPrice">BUFF价格</option>
+        <option value="sellRatio">Steam挂单成本率</option>
+      </select>
+      <select id="sortOrder">
+        <option value="asc">升序</option>
+        <option value="desc">降序</option>
+      </select>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+  </div>
+
+<div class="quality-bar"><span id="quoteSummary" role="status">暂无行情</span><button id="btnNeedsReview" class="text-button">查看待处理</button><span class="quality-note">两侧行情须在 30 分钟内；BUFF 过期需重新扫描</span><span id="quoteFailureNotice" class="error" role="status" hidden></span></div>
+  <div class="table-container">
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th class="col-rank">#</th>
+          <th class="col-name">饰品名称</th>
+          <th class="col-game">游戏</th>
+          <th class="col-price">BUFF买入成本</th>
+          <th class="col-num">BUFF在售</th>
+          <th class="col-price">Steam最低挂单</th>
+          <th class="col-price">挂单净到账</th>
+          <th class="col-ratio">挂单成本率</th>
+          <th class="col-price">Steam最高求购</th>
+          <th class="col-price">快速净到账</th>
+          <th class="col-ratio">快速成本率</th>
+          <th class="col-num">近24h成交</th>
+          <th class="col-num">Steam在售</th>
+          <th class="col-num">供给覆盖</th>
+          <th class="col-num">行情时间</th>
+          <th class="col-action">操作</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="16" class="empty-msg">暂无数据，请先在弹出窗口中扫描</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination" id="pagination"></div>
+
+</main>
+  <script src="lib/constants.js"></script>
+  <script src="lib/dom.js"></script>
+  <script src="lib/opportunity.js"></script>
+  <script src="ui/review-status.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

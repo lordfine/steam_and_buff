@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="popup.css">
+<title>SkinLedger · 饰账</title>
+<link rel="stylesheet" href="ui/brand.css">
+</head>
+<body class="popup-shell">
+  <div class="header">
+    <div class="brand-lockup"><img class="brand-mark" src="ui/logo.svg" alt=""><div><div class="eyebrow">MARKET INTELLIGENCE / EXTENSION</div><h1>SkinLedger <span class="brand-cn">饰账</span></h1></div></div>
+    <div class="header-actions">
+      <button id="btnDashboard" class="btn-icon" title="打开面板">展开工作台 ↗</button>
+    </div>
+  </div>
+
+  <div class="scan-panel">
+    <div class="scan-controls">
+      <select id="gameSelect">
+        <option value="dota2">DOTA2</option>
+        <option value="csgo">CS2</option>
+      </select>
+      <select id="scanMode">
+        <option value="all">全量扫描</option>
+        <option value="current_page">BUFF 当前页</option>
+      </select>
+      <button id="btnStartScan" class="btn-primary">扫描并筛选</button>
+      <button id="btnStopScan" class="btn-danger" disabled>停止</button>
+      <button id="btnEnrichSteam" class="btn-secondary" title="扫描完成会自动核实排名靠前的候选；此按钮可补查当前筛选结果">补查 Steam</button>
+    </div>
+    <div class="progress-bar-container" id="progressContainer" style="display:none;">
+      <div class="progress-bar" id="progressBar"></div>
+      <div class="progress-text" id="progressText">0 / 0</div>
+    </div>
+    <div id="scanStatus" class="scan-status"></div>
+  </div>
+
+  <div class="toolbar" id="toolbar">
+    <input type="search" id="searchInput" placeholder="按饰品名 / Steam 市场名精准搜索..." class="search-input" autocomplete="off">
+    <div class="filter-group">
+      <label class="smart-filter-label"><input type="checkbox" id="candidateFilter" checked> 只看达标候选</label>
+      <label>快速成本率≤ <input type="number" id="ratioFilter" value="0.75" step="0.01" min="0" max="2" class="input-sm"></label>
+      <label>供给覆盖≤ <input type="number" id="maxLiquidityDays" value="3" step="1" min="1" max="365" class="input-sm">天</label>
+      <label>最低价: <input type="number" id="minPriceFilter" value="0" step="1" min="0" class="input-sm"></label>
+      <label>最高价: <input type="number" id="maxPriceFilter" value="99999" step="1" min="0" class="input-sm"></label>
+      <label>BUFF在售≥: <input type="number" id="minBuffSellNum" value="0" step="1" min="0" class="input-sm"></label>
+      <label>Steam日成交≥: <input type="number" id="minSteamVolume" value="0" step="1" min="0" class="input-sm"></label>
+    </div>
+    <div class="sort-group">
+      <select id="sortBy">
+        <option value="opportunity">推荐排序</option>
+        <option value="quickSellCostRate">快速卖出成本率</option>
+        <option value="liquidityDays">供给覆盖天数</option>
+        <option value="steamVolume">Steam近24h成交量</option>
+        <option value="buffSellMinPrice">BUFF价格</option>
+        <option value="sellRatio">Steam挂单成本率</option>
+      </select>
+      <select id="sortOrder">
+        <option value="asc">升序</option>
+        <option value="desc">降序</option>
+      </select>
+      <span id="resultCount" class="result-count"></span>
+    </div>
+  </div>
+
+  <div class="stats-bar" id="statsBar" style="display:none;">
+    <span id="statTotal"></span>
+    <span id="statCandidates"></span>
+    <span id="statTime"></span>
+  </div>
+
+<div class="quality-bar"><span id="quoteSummary" role="status">暂无行情</span><button id="btnNeedsReview" class="text-button">查看待处理</button><span class="quality-note">两侧行情须在 30 分钟内；BUFF 过期需重新扫描</span><span id="quoteFailureNotice" class="error" role="status" hidden></span></div>
+  <div class="item-list" id="itemList">
+    <div class="empty-state">
+      点击「扫描并筛选」；扩展会自动复核比例达标的候选
+    </div>
+  </div>
+
+  <div class="pagination" id="pagination" style="display:none;"></div>
+
+  <script src="lib/constants.js"></script>
+  <script src="lib/dom.js"></script>
+  <script src="lib/opportunity.js"></script>
+  <script src="ui/review-status.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

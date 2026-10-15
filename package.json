@@ -1,0 +1,54 @@
+{
+  "name": "skinledger",
+  "version": "2.2.0",
+  "description": "SkinLedger · 饰账 — BUFF / Steam 双端只读比价工作台",
+  "private": true,
+  "main": "desktop/main.js",
+  "author": "lordfine",
+  "license": "MIT",
+  "scripts": {
+    "start": "node build/start-desktop.js",
+    "demo": "node build/start-desktop.js --demo",
+    "dev": "node build/start-desktop.js --dev",
+    "test": "node tests/run-tests.js && node tests/integration-test.js && node tests/buff-auth-regression.js && node --test tests/desktop.test.js",
+    "test:e2e": "playwright test",
+    "pack": "electron-builder --dir --win --x64",
+    "dist": "electron-builder --win portable --x64",
+    "build:extension": "node build/package.js",
+    "test:extension": "node tests/extension-smoke.cjs",
+    "build:brand": "node build/brand-assets.cjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "electron": "44.7.2",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "local.steam.balance",
+    "productName": "SkinLedger",
+    "directories": {
+      "output": "dist/desktop"
+    },
+    "files": [
+      "desktop/**/*",
+      "lib/**/*",
+      "background.js",
+      "icons/**/*",
+      "package.json",
+      "ui/**/*",
+      "LICENSE"
+    ],
+    "asar": true,
+    "win": {
+      "target": "portable",
+      "signAndEditExecutable": true,
+      "icon": "icons/icon.ico",
+      "signExecutable": false
+    },
+    "artifactName": "SkinLedger-${version}-${arch}.${ext}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lordfine/skinledger.git"
+  }
+}

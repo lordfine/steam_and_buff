@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>SkinLedger · 饰账｜本地版</title>
+<link rel="stylesheet" href="table.css">
+<link rel="stylesheet" href="desktop.css">
+<link rel="stylesheet" href="../ui/brand.css">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand-lockup"><img class="brand-mark" src="../ui/logo.svg" alt=""><div><div class="eyebrow">MARKET INTELLIGENCE / DESKTOP</div><h1>SkinLedger <span class="brand-cn">饰账</span></h1></div></div>
+    <div class="top-actions">
+      <button id="btnRefresh" class="btn">重读本地数据</button>
+      <button id="btnHistory" class="btn btn-secondary">扫描历史</button>
+      <button id="btnEnrichSteam" class="btn btn-green">复核 Steam 行情</button>
+      <button id="btnExportCSV" class="btn btn-secondary">导出 CSV</button>
+      <button id="btnExportJSON" class="btn btn-secondary">导出 JSON</button>
+    </div>
+  </header>
+
+  <main>
+<section class="workspace-intro"><div><div class="eyebrow">YOUR MARKET WORKSPACE</div><h2>看清每一笔饰品成本。</h2><p>对照两侧行情，让价格、费用与数据新鲜度一起说话。</p></div><div class="flow-legend"><b>01 · BUFF 成本</b><span>→</span><b>02 · Steam 复核</b><span>→</span><b>03 · 候选比较</b></div></section>
+  <section class="scan-panel" aria-label="扫描控制">
+    <div class="panel-heading"><div><h2>扫描工作台</h2><p>BUFF 现金成本 → Steam 钱包净到账估算 · 只读，不自动买卖</p></div><span id="modeBadge" class="mode-badge">本地应用</span></div>
+    <div id="demoNotice" class="demo-notice" hidden>离线演示 · 所有饰品和价格均为合成测试数据，不连接账号或真实市场。正常使用请关闭此窗口后启动正式版。</div>
+    <div class="scan-controls">
+      <label>游戏<select id="gameSelect"><option value="csgo">CS2</option><option value="dota2">DOTA2</option></select></label>
+      <label>扫描范围<select id="scanMode"><option value="current_page">指定页（适合测试）</option><option value="all">全量扫描</option></select></label>
+      <label id="pageField">BUFF 页码<input id="buffPage" type="number" value="1" min="1" max="10000" step="1"></label>
+      <button id="btnStartScan" class="btn">扫描并筛选</button><button id="btnStopScan" class="btn btn-stop" disabled>停止扫描</button>
+      <div class="session-actions"><button id="btnLogin" class="btn btn-outline">登录 BUFF</button><button id="btnCheckSession" class="btn btn-outline">检查登录</button></div>
+    </div>
+    <div class="status-row"><span id="scanStatus" role="status" aria-live="polite">准备就绪，请先登录 BUFF，再开始扫描。</span><span id="sessionStatus">账号会话独立于 Chrome</span></div>
+    <progress id="scanProgress" max="100" value="0" aria-label="扫描进度" hidden></progress>
+    <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+  </section>
+  <div class="overview-cards" id="overviewCards">
+    <div class="card">
+      <div class="card-value" id="ovTotal">-</div>
+      <div class="card-label">扫描商品数</div>
+    </div>
+    <div class="card">
+      <div class="card-value" id="ovAvgRatio">-</div>
+      <div class="card-label">达标候选</div>
+    </div>
+    <div class="card">
+      <div class="card-value" id="ovBestRatio">-</div>
+      <div class="card-label">最佳快速成本率</div>
+    </div>
+    <div class="card">
+      <div class="card-value" id="ovScanTime">-</div>
+      <div class="card-label">数据时间</div>
+    </div>
+  </div>
+
+<div class="section-title"><h2>行情清单</h2><span>只读分析 · 不自动买卖 · 人民币估算</span></div>
+  <div class="toolbar">
+    <input type="search" id="searchInput" placeholder="按饰品名 / Steam 市场名精准搜索..." class="search-input" autocomplete="off">
+    <div class="filter-row">
+      <label><input type="checkbox" id="candidateFilter" checked> 只看达标候选</label>
+      <label>快速成本率≤ <input type="number" id="ratioFilter" value="0.75" step="0.01" min="0" max="2"></label>
+      <label>供给覆盖≤ <input type="number" id="maxLiquidityDays" value="3" step="1" min="1" max="365"> 天</label>
+      <label>最低价: <input type="number" id="minPrice" value="0" step="1" min="0"></label>
+      <label>最高价: <input type="number" id="maxPrice" value="99999" step="1" min="0"></label>
+      <label>BUFF在售≥: <input type="number" id="minBuffSellNum" value="0" step="1" min="0"></label>
+      <label>Steam日成交≥: <input type="number" id="minSteamVolume" value="0" step="1" min="0"></label>
+      <label>游戏:
+        <select id="gameFilter">
+          <option value="all">全部</option>
+          <option value="dota2">DOTA2</option>
+          <option value="csgo">CS2</option>
+        </select>
+      </label>
+      <label><input type="checkbox" id="favoritesOnly"> 只看收藏 <span id="favoriteCount">0</span></label>
+      <label>行情状态 <select id="quoteFilter"><option value="all">全部状态</option><option value="fresh">已完整复核</option><option value="needs">待处理 / 已过期</option><option value="error">复核失败</option><option value="stale">行情过期</option></select></label>
+    </div>
+    <p id="filterMessage" class="error" role="status" hidden></p>
+    <div class="sort-row">
+      <span>排序:</span>
+      <select id="sortBy">
+        <option value="opportunity">推荐排序</option>
+        <option value="quickSellCostRate">快速卖出成本率</option>
+        <option value="liquidityDays">供给覆盖天数</option>
+        <option value="steamVolume">Steam近24h成交量</option>
+        <option value="buffSellMinPrice">BUFF价格</option>
+        <option value="sellRatio">Steam挂单成本率</option>
+      </select>
+      <select id="sortOrder">
+        <option value="asc">升序</option>
+        <option value="desc">降序</option>
+      </select>
+      <span class="result-count" id="resultCount"></span>
+      <button id="btnResetFilters" class="text-button">重置筛选</button>
+    </div>
+  </div>
+
+  <div class="quality-bar"><span id="quoteSummary">暂无行情</span><button id="btnNeedsReview" class="text-button">查看待处理</button><button id="btnFailedReviews" class="text-button" hidden>查看失败详情</button><span class="quality-note">两侧数据均须在 30 分钟内；过期需重新扫描 BUFF / 复核 Steam</span><span id="quoteFailureNotice" class="error" role="status" hidden></span></div>
+
+  <div class="table-container">
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th class="col-rank">#</th>
+          <th class="col-name">饰品名称</th>
+          <th class="col-game">游戏</th>
+          <th class="col-price">BUFF买入成本</th>
+          <th class="col-num">BUFF在售</th>
+          <th class="col-price">Steam最低挂单</th>
+          <th class="col-price">挂单净到账</th>
+          <th class="col-ratio">挂单成本率</th>
+          <th class="col-price">Steam最高求购</th>
+          <th class="col-price">快速净到账</th>
+          <th class="col-ratio">快速成本率</th>
+          <th class="col-num">近24h成交</th>
+          <th class="col-num">Steam在售</th>
+          <th class="col-num">供给覆盖</th>
+          <th class="col-num">行情时间</th>
+          <th class="col-action">操作</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="16" class="empty-msg">暂无数据，请先登录 BUFF 并点击「扫描并筛选」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination" id="pagination"></div>
+
+  <dialog id="detailDialog" aria-labelledby="detailTitle">
+    <div class="dialog-heading"><div><div class="eyebrow">ITEM INSIGHT / 饰品复核</div><h2 id="detailTitle"></h2></div><button id="btnCloseDetail" class="text-button" aria-label="关闭详情">关闭 ×</button></div>
+    <p id="detailHash" class="muted"></p>
+    <div id="detailMetrics" class="detail-metrics"></div>
+    <div id="detailEvidence" class="detail-evidence"></div>
+    <p class="detail-note">净到账按市场费用近似计算；求购深度、交易冷却、价格变动及实际费用可能影响成交。这里只提供对比，不会自动交易。</p>
+    <div class="dialog-actions"><button id="btnDetailFavorite" class="btn btn-outline">收藏</button><button id="btnDetailRefresh" class="btn">重新复核此物品</button></div>
+  </dialog>
+  <dialog id="historyDialog" aria-labelledby="historyTitle">
+    <div class="dialog-heading"><h2 id="historyTitle">扫描历史</h2><button id="btnCloseHistory" class="text-button" aria-label="关闭历史">关闭 ×</button></div>
+    <p class="muted">保留最近 5 份被替换的非空结果。恢复前会保留当前结果；不会把旧报价标为新行情。</p>
+    <div id="historyList"></div><p id="historyFeedback" role="status" class="feedback"></p>
+  </dialog>
+
+  <script src="../lib/constants.js"></script>
+  <script src="../lib/dom.js"></script>
+  <script src="../lib/opportunity.js"></script>
+  <footer><span>成本率越低越划算；供给覆盖不等于成交承诺。Steam 钱包不可提现。</span><button id="btnOpenData" class="text-button">打开本地数据目录</button></footer>
+  </main><script src="renderer.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,9 @@
+:root {
+  --green-900: #173e34; --green-700: #28634f; --green-50: #edf5ef;
+  --stone-50: #f6f7f3; --stone-200: #dce3dc; --stone-500: #68776f; --stone-900: #213a30;
+  --surface: #fff; --canvas: var(--stone-50); --ink: var(--stone-900); --muted: var(--stone-500);
+  --primary: var(--green-700); --primary-deep: var(--green-900); --primary-soft: var(--green-50);
+  --border: var(--stone-200); --danger: #a43939; --warning: #846122;
+  --radius: 12px; --space: 8px; --shadow: 0 5px 20px #193d3006;
+  --button-bg: var(--primary); --card-border: var(--border); --table-head: #edf1eb;
+}

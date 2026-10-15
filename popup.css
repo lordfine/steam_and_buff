@@ -1,0 +1,375 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 760px;
+  max-height: 720px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  color: #333;
+  background: #f8f9fa;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: white;
+}
+
+.header h1 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-icon {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.scan-panel {
+  padding: 10px 14px;
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.scan-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+select, .input-sm {
+  padding: 5px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  background: white;
+}
+
+.btn-primary {
+  padding: 5px 14px;
+  background: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background: #3a56d4;
+}
+
+.btn-primary:disabled {
+  background: #aab;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  padding: 5px 14px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-danger:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  padding: 5px 14px;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-secondary:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #1b4332;
+}
+
+.progress-bar-container {
+  margin-top: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  height: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4361ee, #7209b7);
+  transition: width 0.3s;
+  width: 0%;
+}
+
+.progress-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 20px;
+  font-size: 11px;
+  color: #333;
+  font-weight: 500;
+}
+
+.scan-status {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #666;
+}
+
+.toolbar {
+  padding: 8px 14px;
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.search-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4361ee;
+}
+
+.filter-group, .sort-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.filter-group label, .sort-group label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.smart-filter-label {
+  font-weight: 600;
+  color: #2d6a4f;
+  cursor: pointer;
+  user-select: none;
+}
+
+.smart-filter-label input[type="checkbox"] {
+  accent-color: #2d6a4f;
+}
+
+.stats-bar {
+  padding: 6px 14px;
+  background: #f0f4ff;
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: #555;
+  border-bottom: 1px solid #e0e6f0;
+}
+
+.profit-text {
+  color: #e63946;
+  font-weight: 600;
+}
+
+.item-list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 14px;
+}
+
+.item-card {
+  display: flex;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.item-card:hover {
+  background: #f0f4ff;
+}
+
+.item-card.profitable {
+  background: #f0fff0;
+}
+
+.item-card.profitable:hover {
+  background: #e0ffe0;
+}
+
+.item-info { width: 100%; }
+.item-heading { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.item-name { flex: 1; font-size: 13px; font-weight: 650; }
+.candidate-badge {
+  flex: 0 0 auto;
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: #176b43;
+  background: #d9f5e5;
+  font-size: 10px;
+  font-weight: 700;
+}
+.ratio-chip, .liquidity-chip { color: #475467; }
+.freshness { color: #667085; }
+.item-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px; font-size: 10px; }
+.market-link { color: #3157c8; text-decoration: none; white-space: nowrap; }
+.market-link:hover { text-decoration: underline; }
+.filter-group .input-sm { width: 62px; }
+.sort-group { justify-content: space-between; }
+.sort-group select:first-child { min-width: 190px; }
+.result-count { color: #667085; font-size: 10px; margin-left: auto; }
+
+.item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: #e9ecef;
+  object-fit: cover;
+}
+
+.item-info {
+  min-width: 0;
+}
+
+.item-name {
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-prices {
+  font-size: 11px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.item-prices span {
+  margin-right: 8px;
+}
+
+.price-buff {
+  color: #4361ee;
+}
+
+.price-steam {
+  color: #333;
+}
+
+.price-after-tax {
+  color: #888;
+}
+
+.item-ratio {
+  text-align: right;
+  min-width: 70px;
+}
+
+.ratio-value {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ratio-good {
+  color: #2d6a4f;
+}
+
+.ratio-ok {
+  color: #e9c46a;
+}
+
+.ratio-bad {
+  color: #e63946;
+}
+
+.ratio-label {
+  font-size: 10px;
+  color: #999;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  background: white;
+  border-top: 1px solid #e9ecef;
+}
+
+.pagination button {
+  padding: 3px 10px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.pagination button.active {
+  background: #4361ee;
+  color: white;
+  border-color: #4361ee;
+}
+
+.pagination button:hover {
+  background: #e8ecf8;
+}
