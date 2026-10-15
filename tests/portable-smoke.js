@@ -11,7 +11,7 @@ const { setTimeout: pause } = require('node:timers/promises');
 (async () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'steam-balance-portable-'));
   const profile = path.join(directory, 'fresh-profile');
-  const executable = path.resolve(__dirname, `../dist/desktop/steam_and_buff·倒余额-${require('../package.json').version}-桌面版-x64.exe`);
+  const executable = path.resolve(__dirname, `../dist/desktop/steam_and_buff-${require('../package.json').version}-windows-x64.exe`);
   const env = { ...process.env, STEAM_BALANCE_DATA_DIR: profile };
   delete env.ELECTRON_RUN_AS_NODE;
   const child = spawn(executable, ['--demo', '--remote-debugging-port=0', '--remote-debugging-address=127.0.0.1'], { env, windowsHide: true, stdio: 'ignore' });

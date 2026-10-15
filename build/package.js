@@ -44,6 +44,6 @@ for (const file of files) {
 const directory = Buffer.concat(central), end = Buffer.alloc(22);
 end.writeUInt32LE(0x06054b50); end.writeUInt16LE(files.length, 8); end.writeUInt16LE(files.length, 10);
 end.writeUInt32LE(directory.length, 12); end.writeUInt32LE(offset, 16);
-const zip = path.join(out, 'steam_and_buff·倒余额-' + manifest.version + '-浏览器插件.zip');
+const zip = path.join(out, 'steam_and_buff-' + manifest.version + '-extension.zip');
 fs.writeFileSync(zip + '.tmp', Buffer.concat([...local, directory, end])); fs.renameSync(zip + '.tmp', zip);
 console.log('Extension: ' + zip + '\nUnpacked: ' + stage + '\nFiles: ' + files.length);
